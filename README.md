@@ -1,6 +1,9 @@
 # aws-personalsite
 A small static website that uses Docker+nginx, EC2 and Afraid.org DNS
 
+[![Docker Image CI](https://github.com/Defirence/aws-personalsite/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Defirence/aws-personalsite/actions/workflows/docker-image.yml)
+[![build and scan image](https://github.com/Defirence/aws-personalsite/actions/workflows/snyk-container.yml/badge.svg)](https://github.com/Defirence/aws-personalsite/actions/workflows/snyk-container.yml)
+
 ## USAGE:
 
 ##### Run and bind $HOME to target=/path/to/html/ for Docker nginx.

@@ -28,5 +28,6 @@ A small static website that uses Docker+nginx, EC2 and Afraid.org DNS
 ## Changes:
 
 * 0.1 - Initial Commit. Created Dockerfile. Broke the html in vim when trying to test docker volume bind mounts.
-* 0.2 - Security hardening, nginx config rebuilt from the ground up to mitigate brute force attacks via HTTP/S.
-    - Enabled Snyk container image scanning and GitHub workflows.
+* 0.2: 
+- Security hardening, nginx config rebuilt from the ground up to mitigate brute force attacks via HTTP/S.
+- Enabled Snyk container image scanning and GitHub workflows.

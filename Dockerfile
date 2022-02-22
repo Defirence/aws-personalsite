@@ -1,7 +1,8 @@
 FROM ubuntu:latest
 
 RUN echo "[INFO] Install and configure packages"
-RUN apt-get update -y && apt-get full-upgrade -y && apt-get install ufw nginx python3-certbot-nginx fail2ban -y
+RUN apt-get update -y && apt-get full-upgrade -y && apt-get install apt-utils -y
+RUN apt-get install ufw nginx python3-certbot-nginx fail2ban -y
 
 RUN echo "[INFO] Enabling ufw and allowing Port 22"
 RUN ufw enable

@@ -1,7 +1,7 @@
 [nginx-block]
 enabled = true
 port = http,https
-filter = nginx-bloc
+filter = nginx-block
 failregex = ^<HOST> -.*"(GET|POST|HEAD).*HTTP.*" 437
 ignoreregex =
 backend = auto

@@ -9,7 +9,6 @@ RUN apt-get install nginx python3.9 python3-certbot-nginx fail2ban -y
 #[INFO]: Add local sources
 ADD local-sources.sh /
 RUN /bin/bash /local-sources.sh
-RUN sleep 5
 
 #[INFO]: Verify Python 3.9 is installed
 RUN python3.9 --version
@@ -27,13 +26,13 @@ RUN nginx -t
 
 #[INFO] Enable and configure fail2ban for nginx + sshd
 RUN cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-ADD sshd.local /etc/fail2ban/jail.d/
+ADD sshd-block.local /etc/fail2ban/jail.d/
 ADD nginx-block.local /etc/fail2ban/jail.d/
 RUN service fail2ban restart
 RUN iptables -L -n && sleep 2
 
 #[INFO] Checking fail2ban status
-RUN fail2ban-client status sshd nginx-block
+RUN fail2ban-client status sshd-block nginx-block
 
 #[INFO] Restart nginx and check status
 RUN service nginx restart && sleep 1

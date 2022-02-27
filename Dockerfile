@@ -23,7 +23,7 @@ ADD index.html /var/www/nginx/
 ADD nginx.conf /etc/nginx/
 RUN ln -s /etc/nginx/sites-available/defirence.mooo.com /etc/nginx/sites-enabled/
 #[TESTS - INFO] Linting nginx.conf
-RUN nginx -t /etc/nginx/nginx.conf
+RUN nginx -t
 
 #[INFO] Enable and configure fail2ban for nginx + sshd
 RUN cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local

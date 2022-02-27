@@ -1,9 +1,8 @@
 [nginx-block]
 enabled = true
-port = http,https
+port = 80,443
 filter = nginx-block
 failregex = ^<HOST> -.*"(GET|POST|HEAD).*HTTP.*" 437
-ignoreregex =
 backend = auto
 logpath = /var/log/nginx/suspicious_access.log
 bantime = 259200

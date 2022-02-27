@@ -1,0 +1,7 @@
+[sshd-block]
+enabled = true
+port = 22
+action = iptables-multiport
+logpath = /var/log/sshd_access.log
+maxretry = 5
+bantime = 600

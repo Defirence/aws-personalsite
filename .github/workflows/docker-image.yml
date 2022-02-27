@@ -1,9 +1,9 @@
-name: build
+name: build-dev
 
 on:
   push:
     branches:
-    - dev
+      - dev
 
 jobs:
 
@@ -13,5 +13,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: build nginx-site:dev
       run: docker build . --file Dockerfile --tag nginx-site:dev-$(date +%s)

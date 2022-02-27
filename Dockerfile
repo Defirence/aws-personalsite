@@ -14,18 +14,16 @@ RUN sleep 5
 #[INFO]: Verify Python 3.9 is installed
 RUN python3.9 --version
 
-#[INFO] Checking nginx status and running mkdir
-RUN service nginx status
+#[INFO] Running mkdir for nginx directories
 RUN mkdir -p /var/www/defirence.mooo.com/html
 RUN chown -R $USER:$USER /var/www/defirence.mooo.com/html && chmod -R 755 /var/www/defirence.mooo.com
-
-#[TESTS - INFO] Linting nginx.conf
-RUN nginx -t /etc/nginx/nginx.conf
 
 #[INFO] Copy nginx files and symlink
 ADD index.html /var/www/nginx/
 ADD nginx.conf /etc/nginx/
 RUN ln -s /etc/nginx/sites-available/defirence.mooo.com /etc/nginx/sites-enabled/
+#[TESTS - INFO] Linting nginx.conf
+RUN nginx -t /etc/nginx/nginx.conf
 
 #[INFO] Enable and configure fail2ban for nginx + sshd
 RUN cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local

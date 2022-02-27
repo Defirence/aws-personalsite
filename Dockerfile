@@ -26,8 +26,8 @@ RUN nginx -t
 
 #[INFO] Enable and configure fail2ban for nginx + sshd
 RUN cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-ADD sshd-block.local /etc/fail2ban/jail.d/
-ADD nginx-block.local /etc/fail2ban/jail.d/
+ADD sshd-block.local /etc/fail2ban/
+ADD nginx-block.local /etc/fail2ban/
 RUN service fail2ban restart
 RUN iptables -L -n && sleep 2
 

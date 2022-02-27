@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN /bin/bash ./local-sources.sh
+RUN /bin/bash local-sources.sh
 RUN sleep 5
 
 RUN echo "[INFO] Install and configure packages"

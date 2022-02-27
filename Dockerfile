@@ -29,15 +29,15 @@ RUN nginx -t
 RUN cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 ADD sshd.local /etc/fail2ban/jail.d/
 ADD nginx-block.local /etc/fail2ban/jail.d/
-RUN service restart fail2ban
+RUN service fail2ban restart
 RUN iptables -L -n && sleep 2
 
 #[INFO] Checking fail2ban status
 RUN fail2ban-client status sshd nginx-block
 
 #[INFO] Restart nginx and check status
-RUN service restart nginx && sleep 1
-RUN service status nginx
+RUN service nginx restart && sleep 1
+RUN service nginx status
 
 ################################
 #Commenting this out on dev branch to prevent
@@ -47,7 +47,7 @@ RUN service status nginx
 ################################
 
 #[INFO] Verifying certbot automatic renewal
-RUN service status certbot.timer
+RUN service certbot status
 RUN certbot renew --dry-run
 
 CMD ["nginx" "-g" "daemon off;"]

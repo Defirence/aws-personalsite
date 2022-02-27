@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 #[INFO] Install and configure packages
-RUN apt-get update -y && apt-get full-upgrade -y && apt-get install apt-utils -y
+RUN apt-get update -y && apt-get install apt-utils -y && apt-get full-upgrade -y
 RUN apt-get update -y && apt-get install software-properties-common -y && apt-get install curl -y
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get install nginx python3.9 python3-certbot-nginx fail2ban -y
@@ -15,7 +15,7 @@ RUN sleep 5
 RUN python3.9 --version
 
 #[INFO] Checking nginx status and running mkdir
-RUN systemctl status nginx
+RUN service nginx status
 RUN mkdir -p /var/www/defirence.mooo.com/html
 RUN chown -R $USER:$USER /var/www/defirence.mooo.com/html && chmod -R 755 /var/www/defirence.mooo.com
 
@@ -31,15 +31,15 @@ RUN ln -s /etc/nginx/sites-available/defirence.mooo.com /etc/nginx/sites-enabled
 RUN cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 ADD sshd.local /etc/fail2ban/jail.d/
 ADD nginx-block.local /etc/fail2ban/jail.d/
-RUN systemctl restart fail2ban
+RUN service restart fail2ban
 RUN iptables -L -n && sleep 2
 
 #[INFO] Checking fail2ban status
 RUN fail2ban-client status sshd nginx-block
 
 #[INFO] Restart nginx and check status
-RUN systemctl restart nginx && sleep 1
-RUN systemctl status nginx
+RUN service restart nginx && sleep 1
+RUN service status nginx
 
 ################################
 #Commenting this out on dev branch to prevent
@@ -49,7 +49,7 @@ RUN systemctl status nginx
 ################################
 
 #[INFO] Verifying certbot automatic renewal
-RUN systemctl status certbot.timer
+RUN service status certbot.timer
 RUN certbot renew --dry-run
 
 CMD ["nginx" "-g" "daemon off;"]

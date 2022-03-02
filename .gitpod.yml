@@ -3,7 +3,7 @@ tasks:
   - init: docker
     command: build . --file Dockerfile --tag nginx-site:dev-$(date +%s)
   - init: docker
-    command: run -d nginx-site:dev-$(date +%s) -p 80:80
+    command: container run -d --name test-nginx run -d -p 80:80 nginx-site:dev-$(date +%s)
 
 ports:
   - port: 80

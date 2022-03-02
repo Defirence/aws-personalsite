@@ -1,7 +1,7 @@
 # Commands to start when Gitpod spins up
 tasks:
   - init: docker build --file Dockerfile . --tag nginx-site:dev-$(date +%s)
-    command: docker container run -d --name test-nginx run -d -p 80:80 nginx-site:dev-$(date +%s)
+    command: docker container run --name nginx-site:dev-$(date +%s) -p 80:80 nginx-site:dev-$(date +%s)
 
 ports:
   - port: 80

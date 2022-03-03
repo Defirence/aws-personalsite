@@ -1,7 +1,6 @@
 # Commands to start when Gitpod spins up
 tasks: 
-  - init: docker run nginx:latest
+  - init: docker run -p 0.0.0.0:8000:80 nginx:latest
 ports:
-  - port: 80
-  - port: 443
+  - port: 8000
     onOpen: open-preview

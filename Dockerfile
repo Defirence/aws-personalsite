@@ -1,14 +1,9 @@
-FROM ubuntu:latest
-
-EXPOSE 80/tcp
-
-RUN apt-get update -y && apt-get install apt-utils -y && apt-get full-upgrade -y
-RUN apt-get update -y && apt-get install software-properties-common -y
-RUN apt-get install nginx -y
+FROM nginx:latest
 
 ADD index.html /var/www/nginx/
 ADD nginx.conf /etc/nginx/
 
 RUN nginx -t
 
+EXPOSE 80
 CMD ["nginx","-g daemon off;"]

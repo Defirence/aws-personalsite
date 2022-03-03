@@ -1,9 +1,8 @@
 FROM nginx:latest
 
-ADD index.html /var/www/nginx/
-ADD nginx.conf /etc/nginx/
-
+ADD index.html /var/www/nginx/index.html
+ADD nginx.conf /etc/nginx/nginx.conf
 RUN nginx -t
 
-EXPOSE 80
 CMD ["nginx","-g daemon off;"]
+EXPOSE 80

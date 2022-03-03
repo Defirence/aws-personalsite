@@ -1,0 +1,6 @@
+tasks:
+  - before: docker build -f Dockerfile . -t nginxsite:dev
+    command: docker run -p 0.0.0.0:8000:80 -d nginxsite:dev
+ports:
+  - port: 8000
+    onOpen: open-preview

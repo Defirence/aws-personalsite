@@ -3,30 +3,24 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-# A sample workflow which checks out the code, builds a container
-# image using Docker and scans that image for vulnerabilities using
-# Snyk. The results are then uploaded to GitHub Security Code Scanning
-#
 # For more examples, including how to limit scans to only high-severity
 # issues, monitor images for newly disclosed vulnerabilities in Snyk and
 # fail PR checks for new vulnerabilities, see https://github.com/snyk/actions/
 
-name: Build,SnykScan
+name: Snyk Scan
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ main ]
+    branches: 
+      - dev
 
 jobs:
   snyk:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build nginx-site:dev
-      run: docker build -t nginx-site:dev -f Dockerfile .
+    - name: Build nginx-site:SnykyTests
+      run: docker build -t nginx-site:SnykyTests -f Dockerfile .
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
@@ -38,7 +32,7 @@ jobs:
         # or you can signup for free at https://snyk.io/login
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        image: nginx:site:dev
+        image: nginx-site:SnykyTests
         args: --file=Dockerfile
     - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v1

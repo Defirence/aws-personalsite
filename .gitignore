@@ -1,1 +1,4 @@
 .dccache
+.ignore/aws_site.txt
+.ignore/django_pip_requirements.txt
+.ignore/UnicodetoHexConversion.txt
